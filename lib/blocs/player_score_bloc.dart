@@ -21,6 +21,8 @@ class PlayerScoreBloc extends Bloc<PlayerScoreEvent, PlayerScoreState> {
           users.add(User.fromMap(data.value));
         }
 
+        users.sort((a, b) => b.highScore.compareTo(a.highScore));
+
         yield PlayerScoreFetchSuccess(users: users);
       }
     } catch (error) {
