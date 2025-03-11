@@ -20,9 +20,8 @@ class ScoreCubit extends Cubit<int> {
       // save only high score
       if (state > highScore) {
         FirebaseDatabase database = FirebaseDatabase.instance;
-        DatabaseReference ref = database.reference();
-        DataSnapshot snapshot = await ref.once();
-        var value = snapshot.value;
+        DatabaseReference ref = database.ref();
+        DataSnapshot snapshot = await ref.get();
 
         User user = User(
           id: userId,
@@ -30,27 +29,34 @@ class ScoreCubit extends Cubit<int> {
           highScore: state,
         );
 
-        if (value == null) {
-          ref.push().set(user.toMap());
+        if (!snapshot.exists) {
+          // Jika database kosong, tambahkan user baru
+          await ref.push().set(user.toMap());
         } else {
           String? key;
-          for (var data in snapshot.value.entries) {
-            String fireUserId = data.value['user_id'];
-            if (fireUserId == userId) {
-              key = data.key;
-              break;
-            }
-          }
+          Map<Object?, Object?> dataMap =
+              snapshot.value as Map<Object?, Object?>;
+
+          // Mencari user dengan user_id yang sama
+          key = dataMap.entries
+              .firstWhere(
+                (entry) =>
+                    entry.value is Map &&
+                    (entry.value as Map)['user_id'] == userId,
+                orElse: () => const MapEntry(null, null),
+              )
+              .key as String?;
 
           if (key != null) {
-            DatabaseReference child = ref.child(key);
-            child.update({'high_score': highScore});
+            // Update skor jika user ditemukan
+            await ref.child(key).update({'high_score': state});
           } else {
-            ref.push().set(user.toMap());
+            // Tambahkan user baru jika tidak ditemukan
+            await ref.push().set(user.toMap());
           }
         }
 
-        // update local
+        // Update high score secara lokal
         await preferences.setInt('high_score', state);
         _highScoreCubit.update(state);
       }

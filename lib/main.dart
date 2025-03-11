@@ -27,32 +27,32 @@ class MyApp extends StatelessWidget {
             secondary: Pallette.backgroundColor2,
           ),
           textTheme: const TextTheme(
-            headline1: TextStyle(
+            displayLarge: TextStyle(
               fontFamily: 'Gluten',
               fontSize: 40.0,
               color: Colors.white,
             ),
-            bodyText1: TextStyle(
+            bodyLarge: TextStyle(
               fontFamily: 'Gluten',
               fontSize: 30.0,
               color: Colors.white,
             ),
-            bodyText2: TextStyle(
+            bodyMedium: TextStyle(
               fontFamily: 'Gluten',
               fontSize: 20.0,
               color: Colors.white,
             ),
-            subtitle1: TextStyle(
+            titleMedium: TextStyle(
               fontFamily: 'Gluten',
               fontSize: 20.0,
               color: Colors.black,
             ),
-            caption: TextStyle(
+            bodySmall: TextStyle(
               fontFamily: 'Gluten',
               fontSize: 15.0,
               color: Colors.red,
             ),
-            button: TextStyle(
+            labelLarge: TextStyle(
               fontFamily: 'Gluten',
               fontSize: 25.0,
             ),

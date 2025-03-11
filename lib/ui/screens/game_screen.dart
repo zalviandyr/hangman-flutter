@@ -213,7 +213,7 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
                     'Game Over',
                     style: Theme.of(context)
                         .textTheme
-                        .bodyText1!
+                        .bodyLarge!
                         .copyWith(color: Pallette.red),
                   ),
                   const SizedBox(height: 20.0),
@@ -402,7 +402,7 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
           builder: (context, state) {
             return Text(
               state.toString(),
-              style: Theme.of(context).textTheme.bodyText1,
+              style: Theme.of(context).textTheme.bodyLarge,
             );
           },
         ),

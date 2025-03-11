@@ -168,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 40.0),
               Text(
                 'Hangman',
-                style: Theme.of(context).textTheme.headline1,
+                style: Theme.of(context).textTheme.displayLarge,
               ),
               const SizedBox(height: 30.0),
               PrimaryButton(
@@ -188,14 +188,14 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 70.0),
               Text(
                 'Skor tertinggi mu',
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
               const SizedBox(height: 20.0),
               BlocBuilder<HighScoreCubit, int>(
                 builder: (context, state) {
                   return Text(
                     state.toString(),
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyLarge,
                   );
                 },
               ),

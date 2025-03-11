@@ -14,11 +14,15 @@ class PlayerScoreBloc extends Bloc<PlayerScoreEvent, PlayerScoreState> {
 
         List<User> users = [];
         FirebaseDatabase database = FirebaseDatabase.instance;
-        DatabaseReference ref = database.reference();
-        DataSnapshot snapshot = await ref.once();
+        DatabaseReference ref = database.ref();
+        DatabaseEvent event = await ref.once();
 
-        for (var data in snapshot.value.entries) {
-          users.add(User.fromMap(data.value));
+        if (event.snapshot.value != null && event.snapshot.value is Map) {
+          Map dataMap = event.snapshot.value as Map;
+
+          users = dataMap.entries
+              .map((entry) => User.fromMap(entry.value as Map<String, dynamic>))
+              .toList();
         }
 
         users.sort((a, b) => b.highScore.compareTo(a.highScore));

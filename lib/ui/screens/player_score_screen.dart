@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:hangman/blocs/blocs.dart';
 import 'package:hangman/blocs/event_state/event_state.dart';
 import 'package:hangman/models/models.dart';
